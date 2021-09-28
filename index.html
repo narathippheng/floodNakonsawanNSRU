@@ -22,6 +22,7 @@
         <div id="map">
         </div>
         <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
         <script src="js/leaflet.pattern.js"></script>
         <script src="js/leaflet-hash.js"></script>
@@ -29,7 +30,6 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
-        <script src="data/_2.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
@@ -66,59 +66,13 @@
                                               {pane: 'pane__1'});
         bounds_group.addLayer(layer__1);
         map.addLayer(layer__1);
-        function pop__2(feature, layer) {
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['AMPHOE_T'] !== null ? autolinker.link(feature.properties['AMPHOE_T'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
-
-        function style__2_0() {
-            return {
-                pane: 'pane__2',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'square',
-                lineJoin: 'bevel',
-                weight: 1.0,
-                fillOpacity: 0,
-                interactive: true,
-            }
-        }
-        map.createPane('pane__2');
-        map.getPane('pane__2').style.zIndex = 402;
-        map.getPane('pane__2').style['mix-blend-mode'] = 'normal';
-        var layer__2 = new L.geoJson(json__2, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json__2',
-            layerName: 'layer__2',
-            pane: 'pane__2',
-            onEachFeature: pop__2,
-            style: style__2_0,
-        });
-        bounds_group.addLayer(layer__2);
-        map.addLayer(layer__2);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/_2.png" /> ขอบเขตอำเภอ': layer__2,"ระดับความเสี่ยง": layer__1,"OpenStreetMap": layer_OpenStreetMap_0,},{collapsed:false}).addTo(map);
+        L.control.layers(baseMaps,{"ระดับความเสี่ยง": layer__1,"OpenStreetMap": layer_OpenStreetMap_0,},{collapsed:false}).addTo(map);
         setBounds();
         L.ImageOverlay.include({
             getBounds: function () {
                 return this._bounds;
             }
-        });
-        resetLabels([layer__2]);
-        map.on("zoomend", function(){
-            resetLabels([layer__2]);
-        });
-        map.on("layeradd", function(){
-            resetLabels([layer__2]);
-        });
-        map.on("layerremove", function(){
-            resetLabels([layer__2]);
         });
         </script>
     </body>
